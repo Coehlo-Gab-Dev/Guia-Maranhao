@@ -1,14 +1,16 @@
-🗺️ Guia Maranhão - API de Serviços Públicos
-🎯 Sobre o Projeto
+# 🗺️ Guia Maranhão - API de Serviços Públicos
+
+### 🎯 Sobre o Projeto
 
 O Guia Maranhão é um projeto Full-Stack com a missão de facilitar o acesso da população do estado do Maranhão a informações sobre unidades de serviços públicos. A plataforma visa centralizar e disponibilizar dados sobre locais de saúde, educação, cultura e assistência social em todos os municípios maranhenses.
 
 🏗️ Status Atual: Foco no Back-End
-Atualmente, o projeto encontra-se na fase de desenvolvimento do back-end. Estamos construindo uma API RESTful robusta, segura e resiliente que servirá como a espinha dorsal para todas as futuras aplicações cliente (web e mobile).
+Atualmente, o projeto encontra-se na fase de desenvolvimento do back-end. Estou construindo uma API RESTful robusta, segura e resiliente que servirá como a espinha dorsal para todas as futuras aplicações cliente (web e posteriormente mobile).
 
-A decisão de focar primeiramente no back-end garante que teremos uma base de dados sólida, regras de negócio bem definidas e integrações com serviços externos (como Google Maps e IBGE) funcionando perfeitamente antes de iniciarmos a construção da interface para o usuário final.
+A decisão de focar primeiramente no back-end garante que terei uma base de dados sólida, regras de negócio bem definidas e integrações com serviços externos (como Google Maps e IBGE) funcionando perfeitamente antes de iniciar a construção da interface para o usuário final.
 
-Funcionalidades já Implementadas (Back-End):
+## Funcionalidades já Implementadas (Back-End):
+
 ✅ Importação de Municípios: Sistema para buscar e salvar todos os municípios do Maranhão a partir da API do IBGE.
 
 ✅ Sincronização de Serviços: Busca de locais públicos (hospitais, escolas, etc.) na API do Google Places e armazenamento no banco de dados local.
@@ -19,7 +21,12 @@ Funcionalidades já Implementadas (Back-End):
 
 ✅ Resiliência (Fallback): A API é capaz de funcionar com dados locais caso os serviços do Google fiquem indisponíveis.
 
-🚀 Próximos Passos e Melhorias Futuras
+---
+
+
+# 🚀 Próximos Passos e Melhorias Futuras
+
+
 Este projeto está em constante evolução. Os próximos passos planejados são:
 
 Back-End:
@@ -27,14 +34,14 @@ Back-End:
 
 [ ] Tratamento de Erros Centralizado: Implementação de um middleware para padronizar as respostas de erro.
 
-[ ] Documentação da API: Geração de uma documentação interativa com Swagger/OpenAPI.
+[ ] Documentação da API: Geração de uma documentação interativa com Swagger.
 
 [ ] Sistema de Logs: Implementação de logs detalhados de eventos e erros com Winston.
 
 [ ] Testes Automatizados: Criação de testes unitários e de integração.
 
 Front-End (Fase Futura):
-[ ] Desenvolvimento de uma aplicação web (React/Vue/Angular) para consumir a API.
+[ ] Desenvolvimento de uma aplicação web (React/Angular) para consumir a API.
 
 [ ] Visualização dos serviços em um mapa interativo.
 
@@ -60,7 +67,7 @@ Google Cloud (Places API, Routes API)
 ⚙️ Como Executar o Projeto (Back-End)
 Clone o repositório:
 
-git clone <url-do-seu-repositorio>
+git clone <https://github.com/Coehlo-Gab-Dev/Guia-Maranhao>
 cd guia-maranhao-api
 
 Instale as dependências:
