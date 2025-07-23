@@ -1,7 +1,6 @@
 import express from 'express';
 import { importarMunicipios, listarMunicipios } from '../controllers/municipioController.js';
 
-// Cria uma nova instância do roteador do Express
 const router = express.Router();
 
 /**

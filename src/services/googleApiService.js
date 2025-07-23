@@ -1,16 +1,14 @@
 import axios from 'axios';
 import 'dotenv/config';
 
-// URL base para a API do Google Places
 const PLACES_API_URL = 'https://maps.googleapis.com/maps/api/place';
 const API_KEY = process.env.GOOGLE_MAPS_API_KEY;
 
 /**
- * Busca locais na API do Google Places com base em um texto de busca e na localização de um município.
- * @param {string} textoBusca - O texto para buscar (ex: "hospital", "escola pública").
- * @param {string} nomeMunicipio - O nome do município para refinar a busca (ex: "São Luís").
- * @returns {Promise<Array<Object>>} Uma promessa que resolve para um array de locais encontrados.
- * @throws {Error} Lança um erro se a chave da API não estiver configurada ou se a busca falhar.
+ * @param {string} textoBusca 
+ * @param {string} nomeMunicipio 
+ * @returns {Promise<Array<Object>>} 
+ * @throws {Error} 
  */
 const buscarLocais = async (textoBusca, nomeMunicipio) => {
   if (!API_KEY) {
@@ -27,8 +25,7 @@ const buscarLocais = async (textoBusca, nomeMunicipio) => {
         key: API_KEY,
         language: 'pt-BR',
       },
-      // Define um timeout para a requisição, crucial para a estratégia de fallback
-      timeout: 5000, // 5 segundos
+      timeout: 5000, 
     });
 
     if (response.data.status !== 'OK' && response.data.status !== 'ZERO_RESULTS') {
@@ -38,7 +35,6 @@ const buscarLocais = async (textoBusca, nomeMunicipio) => {
     return response.data.results || [];
 
   } catch (error) {
-    // Loga o erro e o propaga para ser tratado pelo controller
     if (error.code === 'ECONNABORTED') {
       console.error('❌ Timeout ao chamar a API do Google Places.');
       throw new Error('Timeout: A API do Google demorou muito para responder.');
@@ -48,7 +44,6 @@ const buscarLocais = async (textoBusca, nomeMunicipio) => {
   }
 };
 
-// Futuramente, adicionaremos a função para buscar rotas aqui.
 
 export default {
   buscarLocais,

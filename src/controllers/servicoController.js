@@ -2,13 +2,10 @@ import Servico from '../models/servico.js';
 import Municipio from '../models/municipio.js';
 import googleApiService from '../services/googleApiService.js';
 
-/**
- * Controller para buscar e sincronizar serviços de uma categoria em um município específico.
- * Utiliza a API do Google Places e implementa a lógica de fallback.
- */
+
 const sincronizarServicosPorMunicipio = async (req, res) => {
   const { municipioId } = req.params;
-  const { categoria, busca } = req.query; // ex: categoria='saude', busca='hospital'
+  const { categoria, busca } = req.query; 
 
   if (!categoria || !busca) {
     return res.status(400).json({ message: 'Os parâmetros "categoria" e "busca" são obrigatórios.' });
@@ -24,14 +21,11 @@ const sincronizarServicosPorMunicipio = async (req, res) => {
     let origemDados = 'google_places';
 
     try {
-      // Tenta buscar os dados em tempo real no Google
       locaisEncontrados = await googleApiService.buscarLocais(busca, municipio.nome);
     } catch (error) {
-      // *** ESTRATÉGIA DE FALLBACK ATIVADA ***
       console.warn(`⚠️ Falha na API do Google. Ativando fallback para o município: ${municipio.nome}`);
       console.warn(`Erro: ${error.message}`);
       
-      // Se a API externa falhar, busca no nosso banco de dados local
       const servicosLocais = await Servico.find({ municipioId, categoria });
       return res.status(200).json({
         message: 'AVISO: Operando em modo de fallback. Os dados podem estar desatualizados.',
@@ -44,7 +38,6 @@ const sincronizarServicosPorMunicipio = async (req, res) => {
         return res.status(200).json({ message: 'Nenhum novo local encontrado no Google Places para a busca realizada.' });
     }
 
-    // Processa e salva os locais encontrados no banco de dados
     const operacoes = locaisEncontrados.map(local => ({
       updateOne: {
         filter: { placeId: local.place_id },
@@ -89,9 +82,6 @@ const sincronizarServicosPorMunicipio = async (req, res) => {
   }
 };
 
-/**
- * Controller para listar serviços com base em filtros.
- */
 const listarServicos = async (req, res) => {
     const { municipioId, categoria, busca } = req.query;
     const filtro = {};
@@ -99,7 +89,7 @@ const listarServicos = async (req, res) => {
     if (municipioId) filtro.municipioId = municipioId;
     if (categoria) filtro.categoria = categoria;
     if (busca) {
-        filtro.nome = { $regex: busca, $options: 'i' }; // Busca case-insensitive
+        filtro.nome = { $regex: busca, $options: 'i' }; 
     }
 
     try {

@@ -4,8 +4,6 @@ import { protect } from '../middlewares/authMiddleware.js';
 
 const router = express.Router();
 
-// Todas as rotas neste arquivo exigem que o usuário esteja autenticado.
-// Aplicamos o middleware 'protect' no início para proteger todas elas.
 router.use(protect);
 
 /**

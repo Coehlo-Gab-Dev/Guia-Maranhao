@@ -2,9 +2,8 @@ import jwt from 'jsonwebtoken';
 import 'dotenv/config';
 
 /**
- * Gera um token JWT para um usuário.
- * @param {string} id - O ID do usuário a ser incluído no payload do token.
- * @returns {string} O token JWT gerado.
+ * @param {string} id 
+ * @returns {string}
  */
 const generateToken = (id) => {
   return jwt.sign({ id }, process.env.JWT_SECRET, {

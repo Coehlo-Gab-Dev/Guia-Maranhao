@@ -1,12 +1,9 @@
 import User from '../models/user.js';
 import Servico from '../models/servico.js';
 
-/**
- * Controller para adicionar um serviço aos favoritos do usuário logado.
- */
 const addFavorito = async (req, res) => {
   const { servicoId } = req.body;
-  const userId = req.user._id; // ID do usuário vem do middleware 'protect'
+  const userId = req.user._id; 
 
   try {
     const servico = await Servico.findById(servicoId);
@@ -14,7 +11,6 @@ const addFavorito = async (req, res) => {
       return res.status(404).json({ message: 'Serviço não encontrado.' });
     }
 
-    // Adiciona o serviço ao array de favoritos do usuário, se ainda não existir
     await User.findByIdAndUpdate(userId, {
       $addToSet: { favoritos: { servicoId: servicoId } },
     });
@@ -26,15 +22,12 @@ const addFavorito = async (req, res) => {
   }
 };
 
-/**
- * Controller para remover um serviço dos favoritos do usuário logado.
- */
+
 const removeFavorito = async (req, res) => {
   const { servicoId } = req.params;
   const userId = req.user._id;
 
   try {
-    // Remove o serviço do array de favoritos
     await User.findByIdAndUpdate(userId, {
       $pull: { favoritos: { servicoId: servicoId } },
     });
@@ -46,9 +39,7 @@ const removeFavorito = async (req, res) => {
   }
 };
 
-/**
- * Controller para listar todos os serviços favoritados pelo usuário logado.
- */
+
 const getFavoritos = async (req, res) => {
   const userId = req.user._id;
 
@@ -56,7 +47,7 @@ const getFavoritos = async (req, res) => {
     const user = await User.findById(userId).populate({
         path: 'favoritos.servicoId',
         model: 'Servico',
-        populate: { // Popula também o município dentro do serviço
+        populate: { 
             path: 'municipioId',
             model: 'Municipio',
             select: 'nome uf'
@@ -74,11 +65,8 @@ const getFavoritos = async (req, res) => {
   }
 };
 
-/**
- * Controller para obter o perfil do usuário logado.
- */
+
 const getMe = async (req, res) => {
-    // O objeto req.user já foi populado pelo middleware 'protect'
     res.status(200).json(req.user);
 };
 
